@@ -17,10 +17,15 @@ var fs = require('fs');
       if (error) {
         console.log(error);
       } else {
-        let date = data.events[0].timestamp.toString();
-        let duration_minutes = data.laps[0].total_elapsed_time / 60;
-        console.log(date, duration_minutes)
-        //console.log(data.device_infos)
+        let session_date = data.events[0].timestamp.toString();
+        let session_duration_mins = data.laps[0].total_elapsed_time / 60;
+        let session_power_avg = data.sessions[0].avg_power;
+        let session_power_max = data.sessions[0].max_power;
+        let session_hr_avg = data.sessions[0].avg_heart_rate;
+        let session_hr_max = data.sessions[0].max_heart_rate;
+        let session_distance = data.sessions[0].total_distance;
+        let session_calories = data.sessions[0].total_calories;
+        let session_cadence_avg = data.sessions[0].avg_cadence;
       }
     });
   });
