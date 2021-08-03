@@ -8,6 +8,9 @@
 # testing
 /coverage
 
+# Database Authentication
+/database/config.js
+
 # production
 /build
 
