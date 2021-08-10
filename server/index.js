@@ -19,6 +19,8 @@ app.get('/data', controller.getAllData);
 // add a new ride
 app.post('/add', controller.addNewRide);
 
+app.post('/read', controller.readFile);
+
 app.listen(PORT, (err, result) => {
   if (err) {
     console.log('There was an error starting the server!');
