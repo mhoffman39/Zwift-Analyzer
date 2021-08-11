@@ -15,16 +15,17 @@ module.exports.getAllData = async (req, res) => {
 };
 
 module.exports.addNewRide = (req, res) => {
-  const rideData = req.query;
+  //console.log('data ', req.body)
+  const rideData = req.body;
   const date = rideData.date;
-  const duration = rideData.duration;
+  const duration = Math.floor(rideData.duration);
   const power_avg = rideData.power_avg;
   const power_max = rideData.power_max;
   const hr_avg = rideData.hr_avg;
   const hr_max = rideData.hr_max;
-  const distance = rideData.distance;
+  const distance = Math.floor(rideData.distance);
   const calories = rideData.calories;
-  const cadence = rideData.cadence_avg;
+  const cadence = rideData.cadence;
 
   db.addNewRide(date, duration, power_avg, power_max, hr_avg, hr_max, distance, calories, cadence)
   .then(result => {
@@ -46,10 +47,8 @@ module.exports.readFile = (req, res) => {
         console.error(err.message);
         return;
       }
-      res.writeHead(200, {'content-type': 'text/plain'});
-      res.write('received upload:\n\n');
       // Define variables to be retrieved from .FIT file
-      let session_date, session_duration_mins, session_power_avg, session_power_max, session_hr_avg, session_hr_max, session_distance, session_calories, session_cadence_avg;
+      let session_date, session_duration, session_power_avg, session_power_max, session_hr_avg, session_hr_max, session_distance, session_calories, session_cadence_avg;
 
       // Read a .FIT file
       fs.readFile(files.myFile.path, (err, content) => {
@@ -65,10 +64,9 @@ module.exports.readFile = (req, res) => {
           if (error) {
             console.log(error);
           } else {
-
             // Assigns data to variables
             session_date = data.events[0].timestamp.toString().slice(0, 15);
-            session_duration_mins = data.laps[0].total_elapsed_time / 60;
+            session_duration = data.laps[0].total_elapsed_time / 60;
             session_power_avg = data.sessions[0].avg_power;
             session_power_max = data.sessions[0].max_power;
             session_hr_avg = data.sessions[0].avg_heart_rate;
@@ -78,9 +76,21 @@ module.exports.readFile = (req, res) => {
             session_cadence_avg = data.sessions[0].avg_cadence;
           }
         });
+        let object = {
+          date: session_date,
+          duration: session_duration,
+          power_avg: session_power_avg,
+          power_max: session_power_max,
+          hr_avg: session_hr_avg,
+          hr_max: session_hr_max,
+          distance: session_distance,
+          calories: session_calories,
+          cadence: session_cadence_avg,
+        }
+        res.send(object);
 
         console.log('Date: ', session_date);
-        console.log('Duration: ', session_duration_mins);
+        console.log('Duration: ', session_duration);
         console.log('Power Average: ', session_power_avg);
         console.log('Power Max: ', session_power_max);
         console.log('HR Average: ', session_hr_avg);
@@ -89,12 +99,13 @@ module.exports.readFile = (req, res) => {
         console.log('Calories: ', session_calories);
         console.log('Cadence Average: ', session_cadence_avg);
 
-        res.end(util.inspect({fields: fields, files: files}));
-      });
 
+        // res.writeHead(200, {'content-type': 'text/plain'});
+        // res.write('received upload:\n\n');
+
+        //res.end(util.inspect({fields: fields, files: files}));
+      });
     });
     return;
   }
-
-
 }
