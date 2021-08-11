@@ -23,7 +23,6 @@ module.exports.read = () => {
         } else {
           // Assigns data to variables
           session_date = data.events[0].timestamp.toString().slice(0, 15);
-          //session_date = data.events[0].timestamp;
           session_duration_mins = data.laps[0].total_elapsed_time / 60;
           session_power_avg = data.sessions[0].avg_power;
           session_power_max = data.sessions[0].max_power;
@@ -35,7 +34,6 @@ module.exports.read = () => {
         }
       });
 
-      // Send data to database here
       console.log('Date: ', session_date, typeof(session_date));
       console.log('Duration: ', session_duration_mins, typeof(session_duration_mins));
       console.log('Power Average: ', session_power_avg);
@@ -45,7 +43,6 @@ module.exports.read = () => {
       console.log('Distance: ', session_distance);
       console.log('Calories: ', session_calories);
       console.log('Cadence Average: ', session_cadence_avg);
-
     });
 }
 
