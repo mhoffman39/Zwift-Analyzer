@@ -1,6 +1,5 @@
 const formidable = require('formidable');
 const db = require('../database/model.js');
-const util = require('util');
 const FitParser = require('fit-file-parser').default;
 const fs = require('fs');
 
@@ -14,8 +13,18 @@ module.exports.getAllData = async (req, res) => {
   }
 };
 
+module.exports.getPowerData = async (req, res) => {
+  console.log('power route');
+  try {
+    let powerData = await db.getPowerData();
+    res.status(200).send(powerData);
+  }
+  catch (error) {
+    res.status(500).send(error);
+  }
+}
+
 module.exports.addNewRide = (req, res) => {
-  //console.log('data ', req.body)
   const rideData = req.body;
   const date = rideData.date;
   const duration = Math.floor(rideData.duration);
@@ -41,7 +50,7 @@ module.exports.readFile = (req, res) => {
     // Instantiate a new formidable form for processing
     var form = new formidable.IncomingForm();
 
-    // form.parse analyzes the incoming stream data, picking apart the different fields and files for you.
+    // form.parse analyzes the incoming stream data, picking apart the different fields and files
     form.parse(req, function(err, fields, files) {
       if (err) {
         console.error(err.message);
@@ -88,22 +97,17 @@ module.exports.readFile = (req, res) => {
           cadence: session_cadence_avg,
         }
         res.send(object);
+        return;
 
-        console.log('Date: ', session_date);
-        console.log('Duration: ', session_duration);
-        console.log('Power Average: ', session_power_avg);
-        console.log('Power Max: ', session_power_max);
-        console.log('HR Average: ', session_hr_avg);
-        console.log('HR Max: ', session_hr_max);
-        console.log('Distance: ', session_distance);
-        console.log('Calories: ', session_calories);
-        console.log('Cadence Average: ', session_cadence_avg);
-
-
-        // res.writeHead(200, {'content-type': 'text/plain'});
-        // res.write('received upload:\n\n');
-
-        //res.end(util.inspect({fields: fields, files: files}));
+        // console.log('Date: ', session_date);
+        // console.log('Duration: ', session_duration);
+        // console.log('Power Average: ', session_power_avg);
+        // console.log('Power Max: ', session_power_max);
+        // console.log('HR Average: ', session_hr_avg);
+        // console.log('HR Max: ', session_hr_max);
+        // console.log('Distance: ', session_distance);
+        // console.log('Calories: ', session_calories);
+        // console.log('Cadence Average: ', session_cadence_avg);
       });
     });
     return;
