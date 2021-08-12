@@ -4,21 +4,24 @@ const queries = require('./queries.js');
 
 module.exports.getAllData = async () => {
   try {
-    console.log('test')
     const response = await pool.query(queries.getAllData);
-    if (response.rows[0]) {
-      //const userID = response.rows[0].id;
-      console.log(response.rows)
-      // return userID;
-    } else {
-      return null;
-    }
+    return response.rows;
   }
   catch (error) {
-    console.log(error);
+    // console.log(error);
     return error;
   }
 };
+
+module.exports.getPowerData = async () => {
+  try {
+    const response = await pool.query(queries.getPowerData);
+    return response.rows;
+  }
+  catch (error) {
+    return error;
+  }
+}
 
 module.exports.addNewRide = async (date, duration, power_avg, power_max, hr_avg, hr_max, distance, calories, cadence) => {
   try {

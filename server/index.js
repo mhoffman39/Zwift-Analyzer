@@ -9,17 +9,7 @@ app.use(express.json());
 //  serve build folder when it is time for production environment
 // app.use(express.static(__dirname + '/../build'));
 
-//const database = require('../database/index.js');
-
 const PORT = '3005';
-
-// route(s)
-app.get('/data', controller.getAllData);
-
-// add a new ride
-app.post('/add', controller.addNewRide);
-
-app.post('/read', controller.readFile);
 
 app.listen(PORT, (err, result) => {
   if (err) {
@@ -28,3 +18,15 @@ app.listen(PORT, (err, result) => {
     console.log(`Server listening on port ${PORT}!`);
   }
 });
+
+// retrieve all ride data from db
+app.get('/data', controller.getAllData);
+
+//  retrieve power avg and power max for all rides
+app.get('/data/power', controller.getPowerData);
+
+// add a new ride to db
+app.post('/add', controller.addNewRide);
+
+// read .FIT file
+app.post('/read', controller.readFile);
