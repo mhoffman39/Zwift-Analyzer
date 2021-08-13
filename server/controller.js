@@ -14,7 +14,6 @@ module.exports.getAllData = async (req, res) => {
 };
 
 module.exports.getPowerData = async (req, res) => {
-  console.log('power route');
   try {
     let powerData = await db.getPowerData();
     res.status(200).send(powerData);
