@@ -1,5 +1,7 @@
 import Form from 'react-bootstrap/Form';
 
+//what if someone tries to upload a different file type??
+
 const FileInput = ({ onChange }) => {
 
   return (

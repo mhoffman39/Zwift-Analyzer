@@ -1,40 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import UploadButton from './UploadButton';
+import SelectButton from './SelectButton';
 import FileInput from './FileInput';
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      selectedFile: null,
-    };
-    this.onFileChange = this.onFileChange.bind(this);
-    this.onFileUpload = this.onFileUpload.bind(this);
-    this.fileData = this.fileData.bind(this);
-    this.updateDatabase = this.updateDatabase.bind(this);
-  };
+const App = () => {
+  const [selectedFile, setSelectedFile] = useState(null);
 
   // On file select (from the pop up)
-  onFileChange = event => {
-    console.log('test')
-    this.setState({ selectedFile: event.target.files[0] });
+  const onFileChange = (event) => {
+    console.log(event)
+    setSelectedFile(event.target.files[0]);
   };
 
   // On file upload (click the upload button)
-  onFileUpload = async () => {
-    // Create an object of formData
+  const onFileUpload = async () => {
+    // Create a new formData object
     const formData = new FormData();
 
     // Update the formData object
     formData.append(
-      "myFile",
-      this.state.selectedFile,
-      this.state.selectedFile.name
+      "myFile", selectedFile, //selectedFile.name
     );
     // Details of the uploaded files
-    console.log(this.state.selectedFile);
+    console.log(selectedFile);
 
     // Request made to the backend api
     const options = {
@@ -44,7 +33,7 @@ class App extends React.Component {
       const response = await axios.post('http://localhost:3005/read', formData, options);
       const rideData = response.data;
 
-      this.updateDatabase(rideData);
+      updateDatabase(rideData);
     }
     catch (error) {
       console.log(error)
@@ -52,17 +41,17 @@ class App extends React.Component {
   };
 
   // File content to be displayed after file upload is complete
-  fileData = () => {
-    if (this.state.selectedFile) {
+  const fileData = () => {
+    if (selectedFile) {
       return (
         <div>
-                    <br />
+          <br />
           <h2>File Details:</h2>
-          <p>File Name: {this.state.selectedFile.name}</p>
+          <p>File Name: {selectedFile.name}</p>
           <p>File Type: FIT</p>
           <p>
             Last Modified:{" "}
-            {this.state.selectedFile.lastModifiedDate.toDateString()}
+            {selectedFile.lastModifiedDate.toDateString()}
           </p>
         </div>
       );
@@ -76,31 +65,28 @@ class App extends React.Component {
     }
   };
 
-  updateDatabase(data) {
-    console.log('RideData: ', data)
+  const updateDatabase = data => {
+    // console.log('RideData: ', data)
       axios.post('http://localhost:3005/add', data)
       .then(function (res) {
-        console.log(res)
+        console.log('Database updated!');
       })
       .catch(function (res) {
-        console.log(res)
+        console.log(res);
       })
   }
-
-  render() {
-    return (
+  return (
+    <div>
+      <h1>
+        Zwift Analyzer
+      </h1>
       <div>
-        <h1>
-          Zwift Analyzer
-        </h1>
-        <div>
-          <FileInput onChange={this.onFileChange} />
-          <UploadButton onClick={this.onFileUpload} />
-        </div>
-        {this.fileData()}
+        <FileInput onChange={onFileChange()} />
+        <SelectButton onClick={onFileUpload()} label={'Upload'} />
       </div>
-    );
-  }
+      {fileData()}
+    </div>
+  );
 }
 
 export default App;
