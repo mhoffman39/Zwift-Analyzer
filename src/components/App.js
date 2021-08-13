@@ -9,7 +9,6 @@ const App = () => {
 
   // On file select (from the pop up)
   const onFileChange = (event) => {
-    console.log(event)
     setSelectedFile(event.target.files[0]);
   };
 
@@ -81,8 +80,8 @@ const App = () => {
         Zwift Analyzer
       </h1>
       <div>
-        <FileInput onChange={onFileChange()} />
-        <SelectButton onClick={onFileUpload()} label={'Upload'} />
+        <FileInput onChange={onFileChange} />
+        <SelectButton onClick={onFileUpload} label={'Upload'} />
       </div>
       {fileData()}
     </div>
