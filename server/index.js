@@ -26,7 +26,7 @@ app.get('/data', controller.getAllData);
 app.get('/data/power', controller.getPowerData);
 
 // add a new ride to db
-app.post('/add', controller.addNewRide);
+app.post('/data', controller.addNewRide);
 
 // read .FIT file
 app.post('/read', controller.readFile);

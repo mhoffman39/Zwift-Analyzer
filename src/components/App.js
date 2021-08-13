@@ -19,7 +19,7 @@ const App = () => {
 
     // Update the formData object
     formData.append(
-      "myFile", selectedFile, //selectedFile.name
+      "fitFile", selectedFile, //selectedFile.name
     );
     // Details of the uploaded files
     console.log(selectedFile);
@@ -66,7 +66,7 @@ const App = () => {
 
   const updateDatabase = data => {
     // console.log('RideData: ', data)
-      axios.post('http://localhost:3005/add', data)
+      axios.post('http://localhost:3005/data', data)
       .then(function (res) {
         console.log('Database updated!');
       })
