@@ -3,6 +3,7 @@ import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import SelectButton from './SelectButton';
 import FileInput from './FileInput';
+import Power from './Power';
 
 const App = () => {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -84,6 +85,7 @@ const App = () => {
         <SelectButton onClick={onFileUpload} label={'Upload'} />
       </div>
       {fileData()}
+      <Power />
     </div>
   );
 }
