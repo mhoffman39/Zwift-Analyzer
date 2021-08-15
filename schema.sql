@@ -20,10 +20,4 @@ CREATE TABLE ridehistory(
   PRIMARY KEY (id)
 );
 
---TEST DATA
-INSERT INTO ridehistory(
-  date, duration, power_avg, power_max, hr_avg, hr_max, distance, calories, cadence_avg)
-VALUES
-('2021-08-02', 5, 100, 200, 155, 180, 10, 150, 75);
-
 -- int, smallint, real, double precision, char(N), varchar(n), date, time, timestamp, interval

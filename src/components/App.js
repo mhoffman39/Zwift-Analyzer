@@ -3,6 +3,7 @@ import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import SelectButton from './SelectButton';
 import FileInput from './FileInput';
+import Power from './Power';
 
 const App = () => {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -19,7 +20,7 @@ const App = () => {
 
     // Update the formData object
     formData.append(
-      "myFile", selectedFile, //selectedFile.name
+      "fitFile", selectedFile, //selectedFile.name
     );
     // Details of the uploaded files
     console.log(selectedFile);
@@ -66,7 +67,7 @@ const App = () => {
 
   const updateDatabase = data => {
     // console.log('RideData: ', data)
-      axios.post('http://localhost:3005/add', data)
+      axios.post('http://localhost:3005/data', data)
       .then(function (res) {
         console.log('Database updated!');
       })
@@ -84,6 +85,7 @@ const App = () => {
         <SelectButton onClick={onFileUpload} label={'Upload'} />
       </div>
       {fileData()}
+      <Power />
     </div>
   );
 }

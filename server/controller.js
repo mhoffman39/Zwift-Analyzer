@@ -3,6 +3,8 @@ const db = require('../database/model.js');
 const FitParser = require('fit-file-parser').default;
 const fs = require('fs');
 
+// from the GET/data route
+// retrieves all data from database (testing)
 module.exports.getAllData = async (req, res) => {
   try {
     let rideData = await db.getAllData();
@@ -13,6 +15,8 @@ module.exports.getAllData = async (req, res) => {
   }
 };
 
+// from the /data/power route
+// retrieves power_avg and power_max data from the database
 module.exports.getPowerData = async (req, res) => {
   try {
     let powerData = await db.getPowerData();
@@ -23,6 +27,8 @@ module.exports.getPowerData = async (req, res) => {
   }
 }
 
+// from the POST/data route
+//  adds data from a single ride (FIT file) to the database
 module.exports.addNewRide = (req, res) => {
   const rideData = req.body;
   const date = rideData.date;
@@ -44,12 +50,14 @@ module.exports.addNewRide = (req, res) => {
   })
 }
 
+// from the POST/read route
+//reads the FIT file and returns usable data
 module.exports.readFile = (req, res) => {
   if (req.url === '/read' && req.method.toLowerCase() === 'post') {
     // Instantiate a new formidable form for processing
     var form = new formidable.IncomingForm();
 
-    // form.parse analyzes the incoming stream data, picking apart the different fields and files
+    // analyze the incoming stream data, picking apart the different fields and files
     form.parse(req, function(err, fields, files) {
       if (err) {
         console.error(err.message);
@@ -59,16 +67,15 @@ module.exports.readFile = (req, res) => {
       let session_date, session_duration, session_power_avg, session_power_max, session_hr_avg, session_hr_max, session_distance, session_calories, session_cadence_avg;
 
       // Read a .FIT file
-      fs.readFile(files.myFile.path, (err, content) => {
-        // Create a FitParser instance (options argument is optional)
+      fs.readFile(files.fitFile.path, (err, content) => {
+        // Create a FitParser instance with chosen options
         var fitParser = new FitParser({
           speedUnit: 'mph',
           lengthUnit: 'mi',
         });
 
-        // Parse your file
         fitParser.parse(content, (error, data) => {
-          // Handle result of parse method
+          // handle result of parse method
           if (error) {
             console.log(error);
           } else {
@@ -84,6 +91,7 @@ module.exports.readFile = (req, res) => {
             session_cadence_avg = data.sessions[0].avg_cadence;
           }
         });
+        // packages variables up for response
         let object = {
           date: session_date,
           duration: session_duration,
@@ -95,20 +103,11 @@ module.exports.readFile = (req, res) => {
           calories: session_calories,
           cadence: session_cadence_avg,
         }
+        console.log('Date field: ', object.date)
         res.send(object);
         return;
-
-        // console.log('Date: ', session_date);
-        // console.log('Duration: ', session_duration);
-        // console.log('Power Average: ', session_power_avg);
-        // console.log('Power Max: ', session_power_max);
-        // console.log('HR Average: ', session_hr_avg);
-        // console.log('HR Max: ', session_hr_max);
-        // console.log('Distance: ', session_distance);
-        // console.log('Calories: ', session_calories);
-        // console.log('Cadence Average: ', session_cadence_avg);
       });
     });
     return;
-  }
-}
+  };
+};
