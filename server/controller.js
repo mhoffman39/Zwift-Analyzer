@@ -25,7 +25,31 @@ module.exports.getPowerData = async (req, res) => {
   catch (error) {
     res.status(500).send(error);
   }
-}
+};
+
+// from the /data/hr route
+// retrieves hr_avg and hr_max data from the database
+module.exports.getHRData = async (req, res) => {
+  try {
+    let hrData = await db.getHRData();
+    res.status(200).send(hrData);
+  }
+  catch (error) {
+    res.status(500).send(error);
+  }
+};
+
+// from the /data/cadence route
+// retrieves cadence_avg and cadence_max data from the database
+module.exports.getCadenceData = async (req, res) => {
+  try {
+    let cadenceData = await db.getCadenceData();
+    res.status(200).send(cadenceData);
+  }
+  catch (error) {
+    res.status(500).send(error);
+  }
+};
 
 // from the POST/data route
 //  adds data from a single ride (FIT file) to the database

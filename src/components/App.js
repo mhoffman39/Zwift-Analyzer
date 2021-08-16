@@ -4,6 +4,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import SelectButton from './SelectButton';
 import FileInput from './FileInput';
 import Power from './Power';
+import HeartRate from './HeartRate';
+import Cadence from './Cadence';
 
 const App = () => {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -77,15 +79,17 @@ const App = () => {
   }
   return (
     <div>
-      <h1>
-        Zwift Analyzer
-      </h1>
+      <h1>Zwift Analyzer</h1>
       <div>
         <FileInput onChange={onFileChange} />
         <SelectButton onClick={onFileUpload} label={'Upload'} />
+        {fileData()}
       </div>
-      {fileData()}
-      <Power />
+      <div>
+        <Power />
+        <HeartRate />
+        <Cadence />
+      </div>
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import SelectButton from './SelectButton';
+//import SelectButton from './SelectButton';
 import Graph from './Graph';
 
 const Power = () => {
@@ -10,7 +10,7 @@ const Power = () => {
     if (power.length === 0) {
       axios.get('http://localhost:3005/data/power')
       .then(function (res) {
-        console.log('Power: ', res.data)
+        //console.log('Power: ', res.data)
         setPower(res.data);
         return (
           <Graph data={power}/>
@@ -27,6 +27,7 @@ const Power = () => {
   };
   return (
     <div>
+      <h2>Power Data</h2>
       {getPower()}
     </div>
     //<SelectButton onClick={getPower} label={'Power Data'}/>

@@ -21,7 +21,27 @@ module.exports.getPowerData = async () => {
   catch (error) {
     return error;
   }
-}
+};
+
+module.exports.getHRData = async () => {
+  try {
+    const response = await pool.query(queries.getHRData);
+    return response.rows;
+  }
+  catch (error) {
+    return error;
+  }
+};
+
+module.exports.getCadenceData = async () => {
+  try {
+    const response = await pool.query(queries.getCadenceData);
+    return response.rows;
+  }
+  catch (error) {
+    return error;
+  }
+};
 
 module.exports.addNewRide = async (date, duration, power_avg, power_max, hr_avg, hr_max, distance, calories, cadence) => {
   try {
