@@ -43,6 +43,16 @@ module.exports.getCadenceData = async () => {
   }
 };
 
+module.exports.getCumulativeData = async () => {
+  try {
+    const response = await pool.query(queries.getCumulativeData);
+    return response.rows;
+  }
+  catch (error) {
+    return error;
+  }
+};
+
 module.exports.addNewRide = async (date, duration, power_avg, power_max, hr_avg, hr_max, distance, calories, cadence) => {
   try {
     let response = await pool.query(queries.addNewRide, [date, duration, power_avg, power_max, hr_avg, hr_max, distance, calories, cadence]);

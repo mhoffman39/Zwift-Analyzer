@@ -31,6 +31,9 @@ app.get('/data/hr', controller.getHRData);
 //  retrieve cadence avg and cadence max for all rides
 app.get('/data/cadence', controller.getCadenceData);
 
+//  retrieve cumulative totals for duration, distance, and calories
+app.get('/data/cumulative', controller.getCumulativeData);
+
 // add a new ride to db
 app.post('/data', controller.addNewRide);
 

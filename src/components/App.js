@@ -6,6 +6,7 @@ import FileInput from './FileInput';
 import Power from './Power';
 import HeartRate from './HeartRate';
 import Cadence from './Cadence';
+import Cumulative from './Cumulative';
 
 const App = () => {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -84,6 +85,9 @@ const App = () => {
         <FileInput onChange={onFileChange} />
         <SelectButton onClick={onFileUpload} label={'Upload'} />
         {fileData()}
+      </div>
+      <div>
+        <Cumulative />
       </div>
       <div>
         <Power />
