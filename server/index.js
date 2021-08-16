@@ -25,6 +25,12 @@ app.get('/data', controller.getAllData);
 //  retrieve power avg and power max for all rides
 app.get('/data/power', controller.getPowerData);
 
+//  retrieve HR avg and HR max for all rides
+app.get('/data/hr', controller.getHRData);
+
+//  retrieve cadence avg and cadence max for all rides
+app.get('/data/cadence', controller.getCadenceData);
+
 // add a new ride to db
 app.post('/data', controller.addNewRide);
 
