@@ -17,12 +17,12 @@ const Cumulative = () => {
   })
 
   return (
-    <div>
-      <h2>Cumulative Data</h2>
+    <div className="cumulative">
+      <h3>Cumulative Data</h3>
       <div>
-        <h3>{duration}</h3>
-        <h3>{distance}</h3>
-        <h3>{calories}</h3>
+        <h4>{duration} Minutes</h4>
+        <h4>{distance} Miles</h4>
+        <h4>{calories} Calories</h4>
       </div>
     </div>
   )

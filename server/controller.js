@@ -140,7 +140,7 @@ module.exports.readFile = (req, res) => {
           calories: session_calories,
           cadence: session_cadence_avg,
         }
-        console.log('Date field: ', object.date)
+        //console.log('Date field: ', object.date)
         res.send(object);
         return;
       });

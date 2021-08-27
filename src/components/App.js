@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import '../styles.css';
 import SelectButton from './SelectButton';
 import FileInput from './FileInput';
 import Power from './Power';
 import HeartRate from './HeartRate';
 import Cadence from './Cadence';
 import Cumulative from './Cumulative';
+import Logo from './Logo';
 
 const App = () => {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -37,6 +39,7 @@ const App = () => {
       const rideData = response.data;
 
       updateDatabase(rideData);
+      setSelectedFile(null)
     }
     catch (error) {
       console.log(error)
@@ -62,7 +65,7 @@ const App = () => {
       return (
         <div>
           <br />
-          <h4>Choose before Pressing the Upload button</h4>
+          <h4>Select a .FIT file to upload</h4>
         </div>
       );
     }
@@ -80,23 +83,27 @@ const App = () => {
   }
   return (
     <div>
-      <h1>Zwift Analyzer</h1>
-      <div>
-        <FileInput onChange={onFileChange} />
-        <SelectButton onClick={onFileUpload} label={'Upload'} />
-        {fileData()}
+      <div className="title">
+        <Logo />
       </div>
-      <div>
-        <Cumulative />
-      </div>
-      <div>
-        <Power />
-        <HeartRate />
-        <Cadence />
+      <div className="body">
+        <div className="topRow">
+          <div>
+            <FileInput onChange={onFileChange} />
+            <SelectButton onClick={onFileUpload} label={'Upload'} />
+            {fileData()}
+          </div>
+          <Cumulative />
+        </div>
+        <div className="graphs">
+          <Power />
+          <HeartRate />
+          <Cadence />
+        </div>
       </div>
     </div>
   );
-}
+};
 
 export default App;
 
