@@ -25,7 +25,7 @@ const Cadence = () => {
     }
   };
   return (
-    <div>
+    <div className="individualGraph">
       <h2>Average Cadence</h2>
       {getCadence()}
     </div>

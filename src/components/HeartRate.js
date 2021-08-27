@@ -9,7 +9,6 @@ const HeartRate = () => {
     if (HR.length === 0) {
       axios.get('http://localhost:3005/data/hr')
       .then(function (res) {
-        //console.log('HR: ', res.data)
         setHR(res.data);
         return (
           <Graph data={HR}/>
@@ -25,11 +24,11 @@ const HeartRate = () => {
     }
   };
   return (
-    <div>
+    <div className="individualGraph">
       <h2>HR Data</h2>
       {getHR()}
     </div>
   )
-}
+};
 
 export default HeartRate;

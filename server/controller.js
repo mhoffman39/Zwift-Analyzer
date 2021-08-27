@@ -51,6 +51,19 @@ module.exports.getCadenceData = async (req, res) => {
   }
 };
 
+// from the /data/cumulative route
+// retrieves cumulative totals for duration, distance, calories from the database
+module.exports.getCumulativeData = async (req, res) => {
+  try {
+    let cumulativeData = await db.getCumulativeData();
+    // console.log('Cumulative: ', cumulativeData)
+    res.status(200).send(cumulativeData);
+  }
+  catch (error) {
+    res.status(500).send(error);
+  }
+};
+
 // from the POST/data route
 //  adds data from a single ride (FIT file) to the database
 module.exports.addNewRide = (req, res) => {
@@ -127,7 +140,7 @@ module.exports.readFile = (req, res) => {
           calories: session_calories,
           cadence: session_cadence_avg,
         }
-        console.log('Date field: ', object.date)
+        //console.log('Date field: ', object.date)
         res.send(object);
         return;
       });

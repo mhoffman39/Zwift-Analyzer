@@ -1,0 +1,36 @@
+.body {
+  /* background-color: orange; */
+  background-image: linear-gradient(white,orange);
+}
+
+.title {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.topRow {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 40px;
+}
+
+.cumulative {
+  background-color: white;
+  padding: 25px;
+  border: 3px solid black;
+  border-radius: 25px;
+}
+
+.graphs {
+  display: flex;
+  flex-flow: column nowrap;
+  margin: 15px 30px 15px;
+}
+
+.individualGraph {
+  background-color: white;
+  margin: 10px;
+  border: 3px solid black;
+  border-radius: 25px;
+  padding: 15px;
+}

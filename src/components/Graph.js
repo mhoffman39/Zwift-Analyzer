@@ -2,18 +2,17 @@ import React from 'react';
 import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 const Graph = ({ data }) => {
-  //console.log('Data: ',data)
   return(
     <div>
-      <ResponsiveContainer width="100%" height={400} >
+      <ResponsiveContainer width="100%" height={300} >
         <LineChart
           // width={1000}
           // height={400}
           data={data}
           margin={{
             top: 5,
-            right: 30,
-            left: 20,
+            right: 10,
+            left: 10,
             bottom: 10,
           }}
         >
@@ -28,7 +27,7 @@ const Graph = ({ data }) => {
       </ResponsiveContainer>
     </div>
   )
-}
+};
 
 export default Graph;
 

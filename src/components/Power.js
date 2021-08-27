@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-//import SelectButton from './SelectButton';
 import Graph from './Graph';
 
 const Power = () => {
@@ -26,12 +25,10 @@ const Power = () => {
     }
   };
   return (
-    <div>
+    <div className="individualGraph">
       <h2>Power Data</h2>
       {getPower()}
     </div>
-    //<SelectButton onClick={getPower} label={'Power Data'}/>
-
   )
 }
 
