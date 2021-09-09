@@ -10,6 +10,8 @@
 
 # Database Authentication
 /database/config.js
+# Auth0 Credentials
+/src/.env
 
 # production
 /build
