@@ -9,6 +9,7 @@ import HeartRate from './HeartRate';
 import Cadence from './Cadence';
 import Cumulative from './Cumulative';
 import Logo from './Logo';
+import Profile from './Profile';
 
 const App = () => {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -85,6 +86,9 @@ const App = () => {
   }
   return (
     <div>
+      <div>
+        <Profile />
+      </div>
       <div className="title">
         <Logo />
       </div>
