@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import Graph from './Graph';
 
-const Power = () => {
+const Power = ({ count }) => {
   const [power, setPower] = useState([]);
 
   const getPower = () => {

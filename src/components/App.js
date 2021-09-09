@@ -12,6 +12,7 @@ import Logo from './Logo';
 
 const App = () => {
   const [selectedFile, setSelectedFile] = useState(null);
+  const [count, setCount] = useState(0);
 
   // On file select (from the pop up)
   const onFileChange = (event) => {
@@ -76,6 +77,7 @@ const App = () => {
       axios.post('http://localhost:3005/data', data)
       .then(function (res) {
         console.log('Database updated!');
+        setCount(count + 1);
       })
       .catch(function (res) {
         console.log(res);
@@ -96,7 +98,7 @@ const App = () => {
           <Cumulative />
         </div>
         <div className="graphs">
-          <Power />
+          <Power count={count}/>
           <HeartRate />
           <Cadence />
         </div>
