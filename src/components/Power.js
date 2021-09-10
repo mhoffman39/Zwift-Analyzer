@@ -10,6 +10,9 @@ const Power = ({ count }) => {
       axios.get('http://localhost:3005/data/power')
       .then(function (res) {
         //console.log('Power: ', res.data)
+        for (let i = 0; i < res.data.length; i ++) {
+          res.data[i].date = res.data[i].date.slice(0, 10);
+        }
         setPower(res.data);
         return (
           <Graph data={power}/>

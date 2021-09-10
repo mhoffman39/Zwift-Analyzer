@@ -10,6 +10,9 @@ const Cadence = () => {
       axios.get('http://localhost:3005/data/cadence')
       .then(function (res) {
         //console.log('Cadence: ', res.data)
+        for (let i = 0; i < res.data.length; i ++) {
+          res.data[i].date = res.data[i].date.slice(0, 10);
+        }
         setCadence(res.data);
         return (
           <Graph data={cadence}/>
