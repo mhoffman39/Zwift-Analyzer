@@ -9,6 +9,9 @@ const HeartRate = () => {
     if (HR.length === 0) {
       axios.get('http://localhost:3005/data/hr')
       .then(function (res) {
+        for (let i = 0; i < res.data.length; i ++) {
+          res.data[i].date = res.data[i].date.slice(0, 10);
+        }
         setHR(res.data);
         return (
           <Graph data={HR}/>

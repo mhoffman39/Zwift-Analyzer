@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from 'react-bootstrap';
 import { useAuth0 } from '@auth0/auth0-react';
 
-const Profile = () => {
+const Profile = ({displayUser}) => {
   const {
     isLoading,
     isAuthenticated,
@@ -20,6 +20,7 @@ const Profile = () => {
   }
 
   if (isAuthenticated) {
+    displayUser(user);
     return (
       <div>
         Hello {user.name}{' '}

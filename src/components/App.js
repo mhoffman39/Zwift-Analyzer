@@ -14,6 +14,7 @@ import Profile from './Profile';
 const App = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [count, setCount] = useState(0);
+  const [user, setUser] = useState('');
 
   // On file select (from the pop up)
   const onFileChange = (event) => {
@@ -84,10 +85,16 @@ const App = () => {
         console.log(res);
       })
   }
+
+  const displayUser = (userData) => {
+    setUser(userData.email);
+    console.log('User: ', user);
+  }
+
   return (
     <div>
       <div>
-        <Profile />
+        <Profile displayUser={displayUser} />
       </div>
       <div className="title">
         <Logo />
